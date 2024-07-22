@@ -3,6 +3,63 @@ import pytest
 from pydantic import ValidationError
 from datetime import datetime
 from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest
+import uuid
+
+@pytest.fixture
+def user_base_data():
+    return {
+        "email": "john.doe@example.com",
+        "nickname": "john_doe",
+        "first_name": "John",
+        "last_name": "Doe",
+        "bio": "I am a software engineer with over 5 years of experience.",
+        "profile_picture_url": "https://example.com/profile_pictures/john_doe.jpg",
+        "linkedin_profile_url": "https://linkedin.com/in/johndoe",
+        "github_profile_url": "https://github.com/johndoe"
+    }
+
+@pytest.fixture
+def user_create_data(user_base_data):
+    return {
+        **user_base_data,
+        "password": "SecurePassword123!"
+    }
+
+@pytest.fixture
+def user_update_data():
+    return {
+        "email": "john.doe.new@example.com",
+        "nickname": "john_doe_updated",
+        "first_name": "John",
+        "last_name": "Doe",
+        "bio": "I specialize in backend development with Python and Node.js.",
+        "profile_picture_url": "https://example.com/profile_pictures/john_doe_updated.jpg",
+        "linkedin_profile_url": "https://linkedin.com/in/johndoe",
+        "github_profile_url": "https://github.com/johndoe"
+    }
+
+@pytest.fixture
+def user_response_data():
+    return {
+        "id": uuid.uuid4(),  # Ensure this is a UUID object
+        "email": "test@example.com",
+        "nickname": "test_user",
+        "first_name": "Test",
+        "last_name": "User",
+        "bio": "Test user bio",
+        "profile_picture_url": "https://example.com/profiles/test_user.jpg",
+        "linkedin_profile_url": "https://linkedin.com/in/testuser",
+        "github_profile_url": "https://github.com/testuser",
+        "last_login_at": datetime.utcnow(),
+        "is_professional": True
+    }
+
+@pytest.fixture
+def login_request_data():
+    return {
+        "email": "john.doe@example.com",
+        "password": "SecurePassword123!"
+    }
 
 # Tests for UserBase
 def test_user_base_valid(user_base_data):
@@ -24,9 +81,10 @@ def test_user_update_valid(user_update_data):
 
 # Tests for UserResponse
 def test_user_response_valid(user_response_data):
+    user_response_data["id"] = str(user_response_data["id"])  # Ensure id is a string in the fixture
     user = UserResponse(**user_response_data)
-    assert user.id == user_response_data["id"]
-    # assert user.last_login_at == user_response_data["last_login_at"]
+    assert str(user.id) == user_response_data["id"]  # Convert user.id to string for comparison
+    assert user.last_login_at == user_response_data["last_login_at"]
 
 # Tests for LoginRequest
 def test_login_request_valid(login_request_data):
@@ -60,10 +118,10 @@ def test_user_base_url_invalid(url, user_base_data):
     with pytest.raises(ValidationError):
         UserBase(**user_base_data)
 
-# Tests for UserBase
-def test_user_base_invalid_email(user_base_data_invalid):
+# Tests for UserBase invalid email
+def test_user_base_invalid_email(user_base_data):
+    user_base_data["email"] = "john.doe.example.com"
     with pytest.raises(ValidationError) as exc_info:
-        user = UserBase(**user_base_data_invalid)
-    
+        user = UserBase(**user_base_data)
     assert "value is not a valid email address" in str(exc_info.value)
     assert "john.doe.example.com" in str(exc_info.value)
