@@ -26,3 +26,12 @@ To complete this assignment, submit the following:
 | Followed collaborative development practices using Git and GitHub (branching, pull requests, code reviews)              | 15     |
 | Submitted a well-organized GitHub repository with clear documentation, links to closed issues, and a reflective summary | 15     |
 | **Total**                                                                                                               | **100**|
+
+## Fixes performed:
+
+FAILED tests/test_schemas/test_user_schemas.py::test_user_base_valid - KeyError: 'nickname'
+FAILED tests/test_schemas/test_user_schemas.py::test_user_create_valid - KeyError: 'nickname'
+FAILED tests/test_schemas/test_user_schemas.py::test_user_update_valid - KeyError: 'first_name'
+FAILED tests/test_schemas/test_user_schemas.py::test_login_request_valid - pydantic_core._pydantic_core.ValidationError: 1 validation error for LoginRequest
+FAILED tests/test_schemas/test_user_schemas.py::test_user_response_valid - AssertionError: assert UUID('449b6ef4-dc17-480a-9169-5ea21c40011f') == '449b6ef4-dc17-480a-9169-5ea21c40011f'
+
