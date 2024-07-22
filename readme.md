@@ -37,5 +37,22 @@ To complete this assignment, submit the following:
 
 ![image_2024-07-22_175526432](https://github.com/user-attachments/assets/1c53ca84-1803-4fda-9602-38ce899420a0)
 
+## Test_user_Schemas
 
+To fix these errors, I first needed to ensure that the test data includes all required fields and that the data types and formats are correct. 
+Here are the steps to address each error:
+
+1. KeyError: 'nickname' in test_user_base_valid and test_user_create_valid:
+Ensure that the nickname field is included in the user_base_data and user_create_data test fixtures.
+
+2. KeyError: 'first_name' in test_user_update_valid:
+Ensure that the first_name field is included in the user_update_data test fixture.
+
+3. ValidationError for UserResponse schema:
+Ensure that the id field in user_response_data is a valid UUID string.
+
+4. ValidationError for LoginRequest schema:
+Ensure that the email field is included in the login_request_data test fixture instead of username.
+
+5. For test_userr_response_valid, id in user_response_data is a string, but the UserResponse model expects it to be a UUID object. When you assert the equality of user.id and user_response_data["id"], you're comparing a UUID object with a string, which causes the AssertionError. To fix this, I first ensured that the id in user_response_data is a UUID object before performing the assertion. Then I modified the test fixture to convert the id field to a UUID object.
 
