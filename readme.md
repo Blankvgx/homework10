@@ -29,11 +29,11 @@ To complete this assignment, submit the following:
 
 ## Fixes performed:
 
-FAILED tests/test_schemas/test_user_schemas.py::test_user_base_valid - KeyError: 'nickname'
-FAILED tests/test_schemas/test_user_schemas.py::test_user_create_valid - KeyError: 'nickname'
-FAILED tests/test_schemas/test_user_schemas.py::test_user_update_valid - KeyError: 'first_name'
-FAILED tests/test_schemas/test_user_schemas.py::test_login_request_valid - pydantic_core._pydantic_core.ValidationError: 1 validation error for LoginRequest
-FAILED tests/test_schemas/test_user_schemas.py::test_user_response_valid - AssertionError: assert UUID('449b6ef4-dc17-480a-9169-5ea21c40011f') == '449b6ef4-dc17-480a-9169-5ea21c40011f'
+1. FAILED tests/test_schemas/test_user_schemas.py::test_user_base_valid - KeyError: 'nickname'
+2. FAILED tests/test_schemas/test_user_schemas.py::test_user_create_valid - KeyError: 'nickname'
+3. FAILED tests/test_schemas/test_user_schemas.py::test_user_update_valid - KeyError: 'first_name'
+4. FAILED tests/test_schemas/test_user_schemas.py::test_login_request_valid - pydantic_core._pydantic_core.ValidationError: 1 validation error for LoginRequest
+5. FAILED tests/test_schemas/test_user_schemas.py::test_user_response_valid - AssertionError: assert UUID('449b6ef4-dc17-480a-9169-5ea21c40011f') == '449b6ef4-dc17-480a-9169-5ea21c40011f'
 
 ![image_2024-07-22_175526432](https://github.com/user-attachments/assets/1c53ca84-1803-4fda-9602-38ce899420a0)
 
